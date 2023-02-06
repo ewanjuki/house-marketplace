@@ -6,12 +6,7 @@ import {
   uploadBytesResumable,
   getDownloadURL,
 } from "firebase/storage";
-import {
-  doc,
-  getDoc,
-  updateDoc,
-  serverTimestamp,
-} from "firebase/firestore";
+import { doc, getDoc, updateDoc, serverTimestamp } from "firebase/firestore";
 import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import { v4 as uuidv4 } from "uuid";
@@ -97,7 +92,7 @@ function EditListing() {
       toast.error("You can not edit that listing");
       navigate("/");
     }
-  }, []);
+  }, [auth.currentUser.uid, listing, navigate]);
 
   useEffect(() => {
     if (process.env.REACT_APP_GEOCODE_API_KEY !== "") {
@@ -155,7 +150,6 @@ function EditListing() {
 
     if (geolocationEnabled) {
       // Call Google Geocoding API, if apiKey is enabled.
-      const apiKey = "";
       const response = await fetch(
         `https://maps.googleapis.com/maps/api/geocode/json?address=${address}&key=${process.env.REACT_APP_GEOCODE_API_KEY}`
       );
@@ -201,6 +195,8 @@ function EditListing() {
                 break;
               case "running":
                 console.log("Upload is running");
+                break;
+              default:
                 break;
             }
           },

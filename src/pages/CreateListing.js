@@ -140,7 +140,7 @@ function CreateListing() {
       }
     } else {
       geolocation.lat = latitude;
-      geolocation.lng = longitude;      
+      geolocation.lng = longitude;
     }
 
     // Store image in firebase
@@ -164,6 +164,8 @@ function CreateListing() {
                 break;
               case "running":
                 console.log("Upload is running");
+                break;
+              default:
                 break;
             }
           },
@@ -196,7 +198,7 @@ function CreateListing() {
 
     formDataCopy.location = address;
     delete formDataCopy.images;
-    delete formDataCopy.address;    
+    delete formDataCopy.address;
     !formDataCopy.offer && delete formDataCopy.discountedPrice;
 
     const docRef = await addDoc(collection(db, "listings"), formDataCopy);
