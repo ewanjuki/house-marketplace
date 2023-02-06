@@ -60,7 +60,7 @@ function CreateListing() {
         navigate("/sign-in");
       }
     });
-  }, []);
+  }, [auth, navigate]);
 
   useEffect(() => {
     if (process.env.REACT_APP_GEOCODE_API_KEY !== "") {
@@ -118,7 +118,6 @@ function CreateListing() {
 
     if (geolocationEnabled) {
       // Call Google Geocoding API, if apiKey is enabled.
-      const apiKey = "";
       const response = await fetch(
         `https://maps.googleapis.com/maps/api/geocode/json?address=${address}&key=${process.env.REACT_APP_GEOCODE_API_KEY}`
       );
